@@ -1,0 +1,28 @@
+{% extends 'temp_inhert.html' %}
+{% load static %}
+
+{% block body %}
+<div class="mt-4">
+{% if blog_searched|length == 0 %}
+<p>NOT FOUND</p>
+{% endif %}
+{% for blog in blog_searched %}
+<div class="row mb-2">
+    <div class="col-md-12">
+      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+          <h3><strong class="d-inline-block mb-2 text-primary">{{blog.title}}</strong></h3>          
+          <div class="mb-1 text-muted">{{blog.timestamp}}</div>
+          <p class="card-text mb-auto">{{blog.content_main|truncatechars:300|safe}}</p>
+          <a href="read_blog/{{blog.slug}}" class="stretched-link">Continue reading</a>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+         <img src="{% static blog.head_img.url %}" width="250" height="250">
+        </div>
+      </div>
+    </div>
+</div>
+{% endfor %}
+  </div>
+{% endblock body %}
+
